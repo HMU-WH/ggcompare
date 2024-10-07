@@ -346,7 +346,7 @@ StatCompare <- ggplot2::ggproto(
     data <- ggplot2::flip_data(data, params[["flipped"]])
     constant_aes <- split(data[, setdiff(colnames(data), c("y", "group")), drop = FALSE], ~ x + PANEL) |>
       lapply(\(x) { as.data.frame(lapply(x[, setdiff(colnames(x), c("x", "PANEL")), drop = FALSE], \(y) { length(unique(stats::na.omit(y))) })) }) |>
-      do.call(rbind, args = _)
+      (\(x) { do.call(rbind, args = x) })()
     constant_aes <- unique(data[, c("x", "PANEL", colnames(constant_aes)[vapply(constant_aes, \(x) { all(x == 1) }, logical(1))]), drop = FALSE])
     data <- ggproto_parent(Stat, self)$compute_layer(data, params, layout)
     constant_aes <- constant_aes[, union(c("x", "PANEL"), setdiff(colnames(constant_aes), colnames(data))), drop = FALSE]
@@ -383,7 +383,7 @@ StatCompare <- ggplot2::ggproto(
           }
           return(x[order(x[["group"]]), , drop = FALSE])
         }) |>
-        do.call(rbind, args = _)
+        (\(x) { do.call(rbind, args = x) })()
     }
     data <- data[, setdiff(colnames(data), "space"), drop = FALSE]
     return(data)
@@ -410,7 +410,7 @@ StatCompare <- ggplot2::ggproto(
           data.frame(.compare(data), xmin = min(data[["x"]]) - 0.45, xmax = max(data[["x"]]) + 0.45, ymin = start, ymax = start + tip_length * scale_range, space = 0, group = 0)
         } else {
           lapply(split(data, data[["x"]]), \(x) { data.frame(.compare(x), x = x[["x"]][[1]], xmin = x[["x"]][[1]] - 0.45, xmax = x[["x"]][[1]] + 0.45, ymin = start, ymax = start + tip_length * scale_range, space = 0, group = x[["x"]][[1]]) }) |>
-            do.call(rbind, args = _)
+            (\(x) { do.call(rbind, args = x) })()
         }
       )
     } else {
@@ -449,7 +449,7 @@ StatCompare <- ggplot2::ggproto(
           )
         )
       }) |>
-        do.call(rbind, args = _)
+        (\(x) { do.call(rbind, args = x) })()
     }
     data[["q"]] <- p.adjust(data[["p"]], method = correction)
     return(data)
