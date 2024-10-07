@@ -1,6 +1,6 @@
 Package: ggcompare
 Title: Mean Comparison in 'ggplot2'
-Version: 0.0.1.9000
+Version: 0.0.2
 Authors@R: 
     person("Hao", "Wang", email = "wanghao8772@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0009-0000-9477-9585"))
 Description: Add mean comparison annotations to a 'ggplot'. 
