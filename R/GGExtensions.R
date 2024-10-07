@@ -1,3 +1,12 @@
+`%||%` <- function(x, y) {
+  if (is.null(x)) {
+    return(y)
+  } else {
+    return(x)
+  }
+}
+
+
 #' @export
 #'
 #' @title Add Brackets with Labels to a ggplot
