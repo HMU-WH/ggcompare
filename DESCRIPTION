@@ -1,0 +1,19 @@
+Package: ggcompare
+Title: Mean Comparison in 'ggplot2'
+Version: 0.0.2.9000
+Authors@R: 
+    person("Hao", "Wang", email = "wanghao8772@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0009-0000-9477-9585"))
+Description: Add mean comparison annotations to a 'ggplot'. 
+             This package provides an easy way to indicate if two or more groups are significantly different in a 'ggplot'. 
+             Usually you do not need to specify the test method, you only need to tell stat_compare() whether you want to perform a parametric test or a nonparametric test, and stat_compare() will automatically choose the appropriate test method based on your data. 
+             For comparisons between two groups, the p-value is calculated by t-test (parametric) or Wilcoxon rank sum test (nonparametric). For comparisons among more than two groups, the p-value is calculated by One-way ANOVA (parametric) or Kruskal-Wallis test (nonparametric).
+License: Artistic-2.0
+URL: https://hmu-wh.github.io/ggcompare/, https://github.com/HMU-WH/ggcompare/
+BugReports: https://github.com/HMU-WH/ggcompare/issues/
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1)
+Imports: 
+    ggplot2
