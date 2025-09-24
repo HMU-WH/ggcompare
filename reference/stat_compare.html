@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggcompare</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,7 +124,7 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p><code>function</code>, the method for the test; it should support formula interface and return a list with components <code>p.value</code> and <code>method</code> (name).</p></dd>
+<dd><p><code>function</code>, the method for the test, it should support both the <code>x, y</code> interface for comparing two groups and the <code>formula</code> interface for comparing more than two groups. The function should return a <code>list</code> with components <code>p.value</code> (the test's p-value) and <code>method</code> (a character string of the test method name).</p></dd>
 
 
 <dt id="arg-ref-group">ref_group<a class="anchor" aria-label="anchor" href="#arg-ref-group"></a></dt>
@@ -140,7 +140,7 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg-correction">correction<a class="anchor" aria-label="anchor" href="#arg-correction"></a></dt>
-<dd><p><code>character</code>, the method for p-value adjustment; options include <a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust.methods</a> with "<code>none</code>" as the default.</p></dd>
+<dd><p><code>character</code>, the method for p-value adjustment, options include <a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust.methods</a> with "<code>none</code>" as the default.</p></dd>
 
 
 <dt id="arg-panel-indep">panel_indep<a class="anchor" aria-label="anchor" href="#arg-panel-indep"></a></dt>
@@ -163,7 +163,7 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 <dd><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
+the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/annotation_borders.html" class="external-link">borders()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
