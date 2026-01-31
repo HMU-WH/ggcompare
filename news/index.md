@@ -4,6 +4,8 @@
 
 ## ggcompare 0.0.6
 
+CRAN release: 2026-01-31
+
 - Added `overall` parameter to
   [`stat_compare()`](../reference/stat_compare.md) to control whether to
   compare each group (on the axis) against the combined mean of all
