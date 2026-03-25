@@ -1,19 +1,11 @@
-# ggcompare: Mean Comparison in ‘ggplot2’
-
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggcompare)](https://CRAN.R-project.org/package=ggcompare)
-[![R-CMD-check](https://github.com/HMU-WH/ggcompare/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HMU-WH/ggcompare/actions/workflows/R-CMD-check.yaml)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+# StatCompare
 
 ## Introduction
 
-This package is a subsection extracted from my personal toolkit.
-
 It was created to improve upon some shortcomings in
-[`[0.6.4]ggsignif::geom_signif()`](https://github.com/const-ae/ggsignif/)
+[`[0.6.4]ggsignif::geom_signif()`](https://github.com/const-ae/ggsignif)
 and
-[`[0.6.0]ggpubr::stat_compare_means()`](https://github.com/kassambara/ggpubr/):
+[`[0.6.0]ggpubr::stat_compare_means()`](https://github.com/kassambara/ggpubr):
 
 1.  Inability to adapt stably to faceting.
 2.  Inability to perform layer-level P-value adjustment (ggpubr can
@@ -22,31 +14,13 @@ and
     groupings. This is often the cause of poor faceting performance.
 
 Usually you do not need to specify the test method, you only need to
-tell [`stat_compare()`](reference/stat_compare.md) whether you want to
-perform a parametric test or a nonparametric test, and
-[`stat_compare()`](reference/stat_compare.md) will automatically choose
-the appropriate test method based on your data. For comparisons between
-two groups, the p-value is calculated by t-test (parametric) or Wilcoxon
+tell `stat_compare` whether you want to perform a parametric test or a
+nonparametric test, and `stat_compare` will automatically choose the
+appropriate test method based on your data. For comparisons between two
+groups, the p-value is calculated by t-test (parametric) or Wilcoxon
 rank sum test (nonparametric). For comparisons among more than two
 groups, the p-value is calculated by One-way ANOVA (parametric) or
 Kruskal-Wallis test (nonparametric).
-
-## Installation
-
-You can install the released version of `ggcompare` from
-[CRAN](https://CRAN.R-project.org/package=ggcompare) with:
-
-``` r
-install.packages("ggcompare")
-```
-
-You can install the development version of `ggcompare` from
-[GitHub](https://github.com/HMU-WH/ggcompare/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("HMU-WH/ggcompare")
-```
 
 ## Basic
 
@@ -67,21 +41,21 @@ p <- ggplot(mpg, aes(class, displ, color = class)) +
 p + stat_compare()
 ```
 
-![](reference/figures/README-unnamed-chunk-5-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-3-1.png)
 
 ``` r
 # If you just want to display text, you can set parameters "bracket" to FALSE.
 p + stat_compare(bracket = FALSE)
 ```
 
-![](reference/figures/README-unnamed-chunk-6-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-4-1.png)
 
 ``` r
 # If you want to display the test method, you can do this.
 p + stat_compare(aes(label = after_stat(sprintf("%s: %s", method, label))))
 ```
 
-![](reference/figures/README-unnamed-chunk-7-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-5-1.png)
 
 - Comparison between each group and other combined groups.
 
@@ -89,7 +63,7 @@ p + stat_compare(aes(label = after_stat(sprintf("%s: %s", method, label))))
 p + stat_compare(overall = TRUE)
 ```
 
-![](reference/figures/README-unnamed-chunk-8-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-6-1.png)
 
 - Comparison between two groups: specify a reference group.
 
@@ -97,21 +71,21 @@ p + stat_compare(overall = TRUE)
 p + stat_compare(ref_group = "minivan")
 ```
 
-![](reference/figures/README-unnamed-chunk-9-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-7-1.png)
 
 ``` r
 # If you only want to display the p-value less or equal to 0.01, you can do this.
 p + stat_compare(ref_group = "minivan", cutoff = 0.01)
 ```
 
-![](reference/figures/README-unnamed-chunk-10-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-8-1.png)
 
 ``` r
 # If you want to display the significance level, you can do this.
 p + stat_compare(ref_group = "minivan", breaks = c(0, 0.001, 0.01, 0.05, 1))
 ```
 
-![](reference/figures/README-unnamed-chunk-11-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-9-1.png)
 
 - Comparison between two groups: specify the comparison group.
 
@@ -122,7 +96,7 @@ p + stat_compare(tip_length = 0.05,
                  arrow = grid::arrow(type = "closed", length = unit(0.1, "inches"))) # Yeah, this supports adding arrows.
 ```
 
-![](reference/figures/README-unnamed-chunk-12-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-10-1.png)
 
 - Within-group (grouped by the x-axis) population comparison.
 
@@ -134,7 +108,7 @@ ggplot(mpg, aes(drv, displ, fill = class)) +
   theme_test()
 ```
 
-![](reference/figures/README-unnamed-chunk-13-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-11-1.png)
 
 ## Enhancement
 
@@ -153,11 +127,11 @@ p1 <- p + stat_compare(comparisons = comparisons) +
   ggtitle("ggcompare::stat_compare")
 
 # missing test information in some panels
-p2 <- p + ggsignif::geom_signif(comparisons = comparisons, step_increase = 0.1) +
+p2 <- p + geom_signif(comparisons = comparisons, step_increase = 0.1) +
   ggtitle("ggsignif::geom_signif")
 ```
 
-![](reference/figures/README-unnamed-chunk-15-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-14-1.png)
 
 ``` r
 p <- ggplot(mpg, aes(class, displ)) +
@@ -170,10 +144,10 @@ p <- ggplot(mpg, aes(class, displ)) +
 p3 <- p + stat_compare() + ggtitle("ggcompare::stat_compare")
 
 # missing test information in all panels
-p4 <- p + ggpubr::stat_compare_means() + ggtitle("ggpubr::stat_compare_means")
+p4 <- p + stat_compare_means() + ggtitle("ggpubr::stat_compare_means")
 ```
 
-![](reference/figures/README-unnamed-chunk-17-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-16-1.png)
 
 - P-value correction
 
@@ -184,19 +158,4 @@ p5 <- p + stat_compare(ref_group = 1, correction = "fdr") + ggtitle("Layer-level
 p6 <- p + stat_compare(ref_group = 1, correction = "fdr", panel_indep = TRUE) + ggtitle("Panel-level P-value adjustment")
 ```
 
-![](reference/figures/README-unnamed-chunk-19-1.png)
-
-# Package index
-
-## All functions
-
-- [`geom_bracket()`](geom_bracket.md) : Add Brackets with Labels to a
-  ggplot
-- [`stat_compare()`](stat_compare.md) : Add Mean Comparison for Groups
-  to a ggplot
-
-# Articles
-
-### All vignettes
-
-- [StatCompare](StatCompare.md):
+![](StatCompare_files/figure-html/unnamed-chunk-18-1.png)

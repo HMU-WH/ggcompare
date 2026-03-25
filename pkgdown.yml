@@ -1,5 +1,6 @@
 pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
-articles: {}
-last_built: 2026-01-31T11:33Z
+articles:
+  StatCompare: StatCompare.html
+last_built: 2026-03-25T15:04Z
