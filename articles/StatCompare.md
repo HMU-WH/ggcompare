@@ -115,47 +115,35 @@ ggplot(mpg, aes(drv, displ, fill = class)) +
 - Better adaptation to faceting.
 
 ``` r
-p <- ggplot(mpg, aes(drv, displ)) +
+ggplot(mpg, aes(drv, displ)) +
   geom_boxplot() +
+  stat_compare(comparisons = combn(unique(mpg$drv), 2, simplify = FALSE)) +
   facet_grid(cols = vars(class), scales = "free") +
-  theme_test() + 
-  theme(plot.title = element_text(size = 20))
-
-comparisons <- combn(unique(mpg$drv), 2, simplify = FALSE)
-
-p1 <- p + stat_compare(comparisons = comparisons) +
-  ggtitle("ggcompare::stat_compare")
-
-# missing test information in some panels
-p2 <- p + geom_signif(comparisons = comparisons, step_increase = 0.1) +
-  ggtitle("ggsignif::geom_signif")
+  theme_test()
 ```
 
-![](StatCompare_files/figure-html/unnamed-chunk-14-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-12-1.png)
+
+- P-value correction
 
 ``` r
 p <- ggplot(mpg, aes(class, displ)) +
   geom_boxplot() +
   facet_grid(cols = vars(cyl), scales = "free") +
   theme_test() + 
-  theme(plot.title = element_text(size = 20),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-
-p3 <- p + stat_compare() + ggtitle("ggcompare::stat_compare")
-
-# missing test information in all panels
-p4 <- p + stat_compare_means() + ggtitle("ggpubr::stat_compare_means")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-
-![](StatCompare_files/figure-html/unnamed-chunk-16-1.png)
-
-- P-value correction
 
 ``` r
-# Layer-level
-p5 <- p + stat_compare(ref_group = 1, correction = "fdr") + ggtitle("Layer-level P-value adjustment")
-# Panel-level
-p6 <- p + stat_compare(ref_group = 1, correction = "fdr", panel_indep = TRUE) + ggtitle("Panel-level P-value adjustment")
+# Layer-level P-value correction
+p + stat_compare(ref_group = 1, correction = "fdr")
 ```
 
-![](StatCompare_files/figure-html/unnamed-chunk-18-1.png)
+![](StatCompare_files/figure-html/unnamed-chunk-14-1.png)
+
+``` r
+# Panel-level P-value correction
+p + stat_compare(ref_group = 1, correction = "fdr", panel_indep = TRUE)
+```
+
+![](StatCompare_files/figure-html/unnamed-chunk-15-1.png)

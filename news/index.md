@@ -2,6 +2,8 @@
 
 ## ggcompare (development version)
 
+- Added vignettes and required minimum R version 4.2.0.
+
 ## ggcompare 0.0.6
 
 CRAN release: 2026-01-31
