@@ -25,11 +25,13 @@ Kruskal-Wallis test (nonparametric).
 ## Basic
 
 ``` r
+
 library(ggplot2)
 library(ggcompare)
 ```
 
 ``` r
+
 p <- ggplot(mpg, aes(class, displ, color = class)) + 
   geom_boxplot(show.legend = FALSE) + 
   theme_test()
@@ -38,12 +40,14 @@ p <- ggplot(mpg, aes(class, displ, color = class)) +
 - Global comparison: Each x has only one group.
 
 ``` r
+
 p + stat_compare()
 ```
 
 ![](StatCompare_files/figure-html/unnamed-chunk-3-1.png)
 
 ``` r
+
 # If you just want to display text, you can set parameters "bracket" to FALSE.
 p + stat_compare(bracket = FALSE)
 ```
@@ -51,6 +55,7 @@ p + stat_compare(bracket = FALSE)
 ![](StatCompare_files/figure-html/unnamed-chunk-4-1.png)
 
 ``` r
+
 # If you want to display the test method, you can do this.
 p + stat_compare(aes(label = after_stat(sprintf("%s: %s", method, label))))
 ```
@@ -60,6 +65,7 @@ p + stat_compare(aes(label = after_stat(sprintf("%s: %s", method, label))))
 - Comparison between each group and other combined groups.
 
 ``` r
+
 p + stat_compare(overall = TRUE)
 ```
 
@@ -68,12 +74,14 @@ p + stat_compare(overall = TRUE)
 - Comparison between two groups: specify a reference group.
 
 ``` r
+
 p + stat_compare(ref_group = "minivan")
 ```
 
 ![](StatCompare_files/figure-html/unnamed-chunk-7-1.png)
 
 ``` r
+
 # If you only want to display the p-value less or equal to 0.01, you can do this.
 p + stat_compare(ref_group = "minivan", cutoff = 0.01)
 ```
@@ -81,6 +89,7 @@ p + stat_compare(ref_group = "minivan", cutoff = 0.01)
 ![](StatCompare_files/figure-html/unnamed-chunk-8-1.png)
 
 ``` r
+
 # If you want to display the significance level, you can do this.
 p + stat_compare(ref_group = "minivan", breaks = c(0, 0.001, 0.01, 0.05, 1))
 ```
@@ -90,6 +99,7 @@ p + stat_compare(ref_group = "minivan", breaks = c(0, 0.001, 0.01, 0.05, 1))
 - Comparison between two groups: specify the comparison group.
 
 ``` r
+
 p + stat_compare(tip_length = 0.05,
                  step_increase = 0, 
                  comparisons = list(c("compact", "midsize"), c("pickup", "suv")), 
@@ -101,6 +111,7 @@ p + stat_compare(tip_length = 0.05,
 - Within-group (grouped by the x-axis) population comparison.
 
 ``` r
+
 ggplot(mpg, aes(drv, displ, fill = class)) +
   geom_boxplot() +
   stat_compare() +
@@ -115,6 +126,7 @@ ggplot(mpg, aes(drv, displ, fill = class)) +
 - Better adaptation to faceting.
 
 ``` r
+
 ggplot(mpg, aes(drv, displ)) +
   geom_boxplot() +
   stat_compare(comparisons = combn(unique(mpg$drv), 2, simplify = FALSE)) +
@@ -127,6 +139,7 @@ ggplot(mpg, aes(drv, displ)) +
 - P-value correction
 
 ``` r
+
 p <- ggplot(mpg, aes(class, displ)) +
   geom_boxplot() +
   facet_grid(cols = vars(cyl), scales = "free") +
@@ -135,6 +148,7 @@ p <- ggplot(mpg, aes(class, displ)) +
 ```
 
 ``` r
+
 # Layer-level P-value correction
 p + stat_compare(ref_group = 1, correction = "fdr")
 ```
@@ -142,6 +156,7 @@ p + stat_compare(ref_group = 1, correction = "fdr")
 ![](StatCompare_files/figure-html/unnamed-chunk-14-1.png)
 
 ``` r
+
 # Panel-level P-value correction
 p + stat_compare(ref_group = 1, correction = "fdr", panel_indep = TRUE)
 ```
